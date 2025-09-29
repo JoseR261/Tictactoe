@@ -54,10 +54,8 @@ def who_wins(game: list[str]) -> str:
 def play(game: list[str], player: str, position: int) -> list[str]:
     pass
 
-
 def is_authorized_move(game: list[str], position: int) -> bool:
     pass
-
 
 def display(game: list[str]) -> None:
     for i in range(len(game)):
@@ -67,10 +65,10 @@ def display(game: list[str]) -> None:
 
 
 if __name__ == "__main__":
+    game = [EMPTY] * 9
+    current_player = PLAYER_1
+    
     while True:
-        game = [EMPTY] * 9
-        current_player = PLAYER_1
-
         while True:
             try:
                 position = int(input("Enter a position (1-9): "))
@@ -98,4 +96,6 @@ if __name__ == "__main__":
             print(f"Player {winner} wins!")
             break
 
+        print("Current player:", current_player)
         current_player = PLAYER_2 if current_player == PLAYER_1 else PLAYER_1
+        print("Current player:", current_player)
