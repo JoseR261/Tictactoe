@@ -43,27 +43,6 @@ def who_wins(game: list[str]) -> str:
 
     return EMPTY
 
-
-
-
-
-
-
-
-
-
-
-
- if who_wins(game) == 'x':
-     end_game = True
-     print_game(who_wins('Player_1'))
-
- while who_wins(game) == 'o':
-     end_game = True
-     print_game(who_wins('Player_2'))
-
-if game_is_full:
-     end_game = True
-     print_game(who_wins(game))
-
+def display(game: list[str]) -> None:
+    pass
 
