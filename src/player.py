@@ -1,11 +1,10 @@
 class Player:
     symbol: str
-    name: str
 
-    # TODO: Write init method
-    def __init__(self, ...) -> None:
-        ...
+    def __init__(self, symbol) -> None:
+        self.symbol = symbol
 
-    # TODO: Write method "win" that prints "Player {name} wins!"
+
     def win(self) -> None:
-        ...
+        print(f"player {self.symbol} wins!")
+

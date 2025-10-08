@@ -18,17 +18,20 @@ def player_move(game: list[str], player: str) -> list[str]:
 def print_game(game: list[str]) -> None:
     pass
 
-
 def main() -> None:
     pass
 
+def play(game: list[str], player: str, position: int) -> list[str]:
+    pass
+
+def is_authorized_move(game: list[str], position: int) -> bool:
+    pass
 
 def game_is_full(game: list[str]):
     for cell in game:
         if cell == EMPTY:
             return False
     return True
-
 
 def who_wins(game: list[str]) -> str:
     if game[0] == game[1] == game[2] and game != EMPTY:
@@ -50,33 +53,12 @@ def who_wins(game: list[str]) -> str:
 
     return EMPTY
 
-
-def play(game: list[str], player: str, position: int) -> list[str]:
-    pass
-
-def is_authorized_move(game: list[str], position: int) -> bool:
-    pass
-
 def display(game: list[str]) -> None:
     for i in range(len(game)):
         print(game[i], end=" ")
         if (i + 1) % 3 == 0:
             print()
 
-
-if __name__ == "__main__":
-    game = [EMPTY] * 9
-    current_player = PLAYER_1
-    
-    while True:
-        while True:
-            try:
-                position = int(input("Enter a position (1-9): "))
-                if position < 1 or position > 9:
-                    print("Please enter a number between 1 and 9")
-                    continue
-            except ValueError:
-                print("Please enter a valid number")
                 continue
             else:
                 if not is_authorized_move(game, position):
@@ -92,7 +74,8 @@ if __name__ == "__main__":
             break
 
         winner = who_wins(game)
-        if winner != EMPTY:
+
+if __name__ == "__main__":
             print(f"Player {winner} wins!")
             break
 
