@@ -1,7 +1,7 @@
-from math import trunc
-
-from board import Board
 from player import Player
+from board import Board
+from src.constants import EMPTY
+
 
 class Game:
     board: Board
@@ -13,18 +13,33 @@ class Game:
         self.board = board
         self.players = players
         self.scores = []
+        self.is_over = False
+
+
         for _ in players:
             self.scores.append(0)
 
         self.turn = 0
 
-    def play(self):
-        play_x, play_y = self.players[self.turn].get_move()
-        while not self.board.is_valid_move(play_x, play_y):
-            play_x, play_y = self.players[self.turn].get_move()
+    def play(self) -> int:
+        while True:
+            current_player = self.players[self.turn]
+            while True:
+                position = current_player.get_position(self.board, self.players)
+                if self.board.is_move_valid(position):
+                    break
+            print("Move:", position)
 
-        self.board.make_move(play_x, play_y)
-        self.turn = self.turn + 1 % len(self.players)
-    # Write the list of attributes here
+            self.board.play_move(position, current_player)
+            self.board.display()
+            if self.board.winner() != EMPTY:
+                current_player.win()
+                return self.turn
+            self.turn = (self.turn + 1) % len(self.players)
+            if self.board.is_full():
+                print("Game tied")
+                return -1
 
-    # Write the init method
+
+
+
