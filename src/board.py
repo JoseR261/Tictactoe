@@ -1,25 +1,27 @@
 from constants import EMPTY
 from player import Player
-import copy
 
 
 class Board:
-
     number_columns: int
     number_rows: int
 
     def __init__(self, number_columns: int, number_rows: int):
         self.number_columns = number_columns
         self.number_rows = number_rows
-        self.cells = [[EMPTY for _ in range(number_columns)] for _ in range(number_rows)]
+        self.cells = [
+            [EMPTY for _ in range(number_columns)] for _ in range(number_rows)
+        ]
 
     # TODO: Write method "display" that prints the board
     # You'll need my help
     def display(self) -> None:
+        print("==================")
         for row in self.cells:
             for col in row:
-                print(col, end=' ')
+                print(col, end=" ")
             print()
+        print("==================")
 
     def is_move_valid(self, position: int) -> bool:
         if position < 1:
@@ -39,9 +41,8 @@ class Board:
         return x, y
 
     def play_move(self, position: int, player: Player) -> None:
-        x, y = self.convert_position(position -1)
+        x, y = self.convert_position(position - 1)
         self.cells[y][x] = player.symbol
-
 
     def is_full(self) -> bool:
         for row in self.cells:
@@ -50,15 +51,23 @@ class Board:
                     return False
         return True
 
+    def number_of_moves(self) -> int:
+        result = 0
+        for row in self.cells:
+            for cell in row:
+                if cell != EMPTY:
+                    result += 1
+        return result
     def copy(self):
         new_board = Board(self.number_columns, self.number_rows)
-        for row in self.cells:
-            new_board.cells.append(copy.deepcopy(row))
+
+        for i, r in enumerate(self.cells):
+            for j, c in enumerate(r):
+                new_board.cells[i][j] = c
 
         return new_board
 
     def winner(self) -> str:
-
         if self.cells[0][0] == self.cells[0][1] == self.cells[0][2] != EMPTY:
             return self.cells[0][0]
         if self.cells[1][0] == self.cells[1][1] == self.cells[1][2] != EMPTY:
@@ -77,29 +86,5 @@ class Board:
             return self.cells[0][2]
         return EMPTY
 
-
-
-
-
-
-
-
-
-    #if player.simbol == self.cells[0][0] == self.cells[0][1]  == self.cells[0][2]:
+    # if player.simbol == self.cells[0][0] == self.cells[0][1]  == self.cells[0][2]:
     #     return True
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

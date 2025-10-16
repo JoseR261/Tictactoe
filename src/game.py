@@ -1,6 +1,6 @@
 from player import Player
 from board import Board
-from src.constants import EMPTY
+from constants import EMPTY
 
 
 class Game:
@@ -14,7 +14,6 @@ class Game:
         self.players = players
         self.scores = []
         self.is_over = False
-
 
         for _ in players:
             self.scores.append(0)
@@ -39,7 +38,3 @@ class Game:
             if self.board.is_full():
                 print("Game tied")
                 return -1
-
-
-
-
